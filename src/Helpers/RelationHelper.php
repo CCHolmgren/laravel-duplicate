@@ -208,7 +208,7 @@ class RelationHelper
                         $relation = $model->$method();
 
                         if ($relation instanceof Relation) {
-                            static::$relations[$method] = [
+                            static::$relations[get_class($model)][$method] = [
                                 'type' => get_class($relation),
                                 'model' => $relation->getRelated(),
                                 'original' => $relation->getParent(),
@@ -219,6 +219,6 @@ class RelationHelper
             }
         }
 
-        return static::$relations;
+        return static::$relations[get_class($model)];
     }
 }
